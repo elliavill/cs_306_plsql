@@ -5,19 +5,15 @@
 }
 
 <div class="text-center">
-   <h1 class="display-4">Find Instructors by Last Name</h1>
-   <p>Project <a href="pcci.instructure.com/courses/28155/assignments/541203">PL/SQL Cursor and ASP.NET Project</a>.</p>
-   <p></p>
-   @using (Html.BeginForm())
+   <h1 class="display-4">Instructor Count</h1>
+   <p>Enter a last name and or a version of the last name to find the number of instructors with that name.</p>
+   @using (Html.BeginForm("GetInstructor", "Home"))
    {
-      <form method="post" action="Default.aspx">
-         <label for="txtLastName">Enter the last name</label>
-         <input type="text" id="txtLastName" name="txtLastName" />
-         <button asp-page-handler="">Find Instructors</button>
-      </form>
-      <hr />
-
-      <label for="lblResult">Number of Instructors</label>
-      <span id="lblResult" name="lblResult"></span>
+      <input type="text" name="last_name" placeholder="Enter a last name" required />
+      <button type="submit">Count</button>
    }
+   <h3>Results</h3>
+   <p>@ViewData["count"]</p>
+   <p>By Aurel Villyani</p>
+   <p>Project <a href="pcci.instructure.com/courses/28155/assignments/541203">PL/SQL Cursor and ASP.NET Project</a>.</p>
 </div>
