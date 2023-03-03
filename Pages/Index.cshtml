@@ -1,0 +1,20 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Find Instructors by Last Name</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <form method="post" action="Default.aspx">
+       <label for="txtLastName">Enter the last name</label>
+       <input type="text" id="txtLastName" name="txtLastName" />
+       <input type="submit" value="Find Instructors" />
+    </form>
+    <hr />
+
+    <label for="lblResult">Number of Instructors</label>
+    <span id="lblResult" name="lblResult"></span>
+</div>
