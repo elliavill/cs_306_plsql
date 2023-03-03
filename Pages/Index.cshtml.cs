@@ -11,59 +11,36 @@ namespace DOOM.Pages
 {
    public class IndexModel : PageModel
    {
-      [BindProperty]
-      public string LastName { get; set; }
-      public int InstructorCount { get; set; }
-
       public void OnGet()
       {
 
       }
 
-      public void OnPost()
+      public void OnPostCount()
       {
-         InstructorCount = RunPLSQLBlock(LastName);
-      }
-
-
-      public int RunPLSQLBlock(string lastName)
-      {
-         int instructorCount = 0;
          using (OracleConnection con = new OracleConnection("User ID=cs306_avillyani;Password=StudyDatabaseWithDrSparks;Data Source=CSORACLE"))
          {
             con.Open();
             OracleCommand cmd = con.CreateCommand();
-            cmd.CommandText = @" 
-            DECLARE 
-               v_last_name VARCHAR2(100) := :last_name; 
-               v_count NUMBER(3,0) := 0; 
-               CURSOR c_instructors IS SELECT * FROM instructor WHERE last_name LIKE '%' || v_last_name || '%'; 
-               v_instructor instructor%ROWTYPE; 
-            BEGIN 
-               OPEN c_instructors; 
-               LOOP 
-                  FETCH c_instructors INTO v_instructor; 
-                  EXIT WHEN c_instructors%NOTFOUND; 
-                  v_count := v_count + 1; 
-                  DBMS_OUTPUT.PUT_LINE(v_instructor.last_name);
-               END LOOP; 
-               CLOSE c_instructors; 
-               DBMS_OUTPUT.PUT_LINE('Number of instructors with last name ' || v_last_name || ': ' || v_count); 
-            END; 
-            ";
-            /*cmd.Parameters.Add("last_name", OracleDbType.Varchar2).Value = lastName;*/
+            cmd.CommandText = @"DECLARE  
+                                v_last_name VARCHAR2(100) := :last_name;  
+                                v_count NUMBER(3,0) := 0; 
+                            BEGIN  
+                                FOR v_instructor IN (SELECT * FROM instructor WHERE last_name LIKE '%' || :last_name || '%') LOOP  
+                                    v_count := v_count + 1;    
+                                END LOOP;  
+                                raise_application_error(-20000, 'Number of instructors that have that last name or that version is ' || v_count);
+                            END;";
             try
             {
-               cmd.Parameters.Add("last_name", HttpContext.Request.Form["count"].ToString());
+               cmd.Parameters.Add("Number of instructors that have that last name or that version is ", HttpContext.Request.Form["get_words"].ToString());
                cmd.ExecuteNonQuery();
-               /*instructorCount = Convert.ToInt32(cmd.ExecuteScalar());*/
             }
             catch (OracleException ex)
             {
                ViewData["count"] = ex.Message;
             }
          }
-         return instructorCount;
       }
    }
 }

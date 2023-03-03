@@ -1,19 +1,17 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Cursor in PL/SQL";
 }
 
 <div class="text-center">
-   <h1 class="display-4">Instructor Count</h1>
-   <p>Enter a last name and or a version of the last name to find the number of instructors with that name.</p>
+   <h1 class="display-4">Instructor Count Project</h1>
+   <h3>by Aurel Villyani</h3>
+   <p>Enter the name to match the last name or contains a variant of that last name</p>
    @using (Html.BeginForm())
    {
-      <input type="text" name="last_name" placeholder="Enter a last name" required />
-      <button type="submit" asp-page-handler="GetInstructor">Count</button>
+      <input type="text" name="get_words" placeholder="Enter the words" required />
+      <button class="btn-primary" type="submit" asp-page-handler="Count">Count</button>
+      <p>@ViewData["count"]</p>
    }
-   <h3>Results</h3>
-   <p>@ViewData["count"]</p>
-   <p>By Aurel Villyani</p>
-   <p>Project <a href="pcci.instructure.com/courses/28155/assignments/541203">PL/SQL Cursor and ASP.NET Project</a>.</p>
 </div>
