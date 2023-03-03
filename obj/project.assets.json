@@ -808,9 +808,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\138772\\Desktop\\PL_SQL\\PL_SQL.csproj",
-      "projectName": "PL_SQL",
-      "projectPath": "C:\\Users\\138772\\Desktop\\PL_SQL\\PL_SQL.csproj",
+      "projectUniqueName": "C:\\Users\\138772\\Desktop\\PL_SQL\\DOOM.csproj",
+      "projectName": "DOOM",
+      "projectPath": "C:\\Users\\138772\\Desktop\\PL_SQL\\DOOM.csproj",
       "packagesPath": "C:\\Users\\138772\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\138772\\Desktop\\PL_SQL\\obj\\",
       "projectStyle": "PackageReference",

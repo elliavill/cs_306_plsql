@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PL_SQL.Pages
+namespace DOOM.Pages
 {
    public class PrivacyModel : PageModel
    {

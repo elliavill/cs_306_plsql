@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PL_SQL
+namespace DOOM
 {
    public class Program
    {

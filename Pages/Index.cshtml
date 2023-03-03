@@ -5,16 +5,19 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Find Instructors by Last Name</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+   <h1 class="display-4">Find Instructors by Last Name</h1>
+   <p>Project <a href="pcci.instructure.com/courses/28155/assignments/541203">PL/SQL Cursor and ASP.NET Project</a>.</p>
+   <p></p>
+   @using (Html.BeginForm())
+   {
+      <form method="post" action="Default.aspx">
+         <label for="txtLastName">Enter the last name</label>
+         <input type="text" id="txtLastName" name="txtLastName" />
+         <button asp-page-handler="">Find Instructors</button>
+      </form>
+      <hr />
 
-    <form method="post" action="Default.aspx">
-       <label for="txtLastName">Enter the last name</label>
-       <input type="text" id="txtLastName" name="txtLastName" />
-       <input type="submit" value="Find Instructors" />
-    </form>
-    <hr />
-
-    <label for="lblResult">Number of Instructors</label>
-    <span id="lblResult" name="lblResult"></span>
+      <label for="lblResult">Number of Instructors</label>
+      <span id="lblResult" name="lblResult"></span>
+   }
 </div>

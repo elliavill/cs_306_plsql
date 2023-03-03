@@ -5,10 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Oracle.ManagedDataAccess.Client;
-;
 
-namespace PL_SQL.Pages
+namespace DOOM.Pages
 {
    public class IndexModel : PageModel
    {
@@ -17,7 +15,6 @@ namespace PL_SQL.Pages
       public IndexModel(ILogger<IndexModel> logger)
       {
          _logger = logger;
-
       }
 
       public void OnGet()
