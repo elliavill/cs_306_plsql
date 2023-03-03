@@ -7,10 +7,10 @@
 <div class="text-center">
    <h1 class="display-4">Instructor Count</h1>
    <p>Enter a last name and or a version of the last name to find the number of instructors with that name.</p>
-   @using (Html.BeginForm("GetInstructor", "Home"))
+   @using (Html.BeginForm())
    {
       <input type="text" name="last_name" placeholder="Enter a last name" required />
-      <button type="submit">Count</button>
+      <button type="submit" asp-page-handler="GetInstructor">Count</button>
    }
    <h3>Results</h3>
    <p>@ViewData["count"]</p>
