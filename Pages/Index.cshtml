@@ -1,8 +1,6 @@
 ﻿@page
 @model IndexModel
-@{
-    ViewData["Title"] = "Cursor in PL/SQL";
-}
+@{ ViewData["Title"] = "Cursor in PL/SQL"; }
 
 <div class="text-center">
    <h1 class="display-4">Instructor Count Project</h1>
@@ -10,8 +8,7 @@
    <p>Enter the name to match the last name or contains a variant of that last name</p>
    @using (Html.BeginForm())
    {
-      <input type="text" name="get_words" placeholder="Enter the words" required />
-      <button class="btn-primary" type="submit" asp-page-handler="Count">Count</button>
-      <p>@ViewData["count"]</p>
-   }
+        <input type="text" name="letter_in_last_name" placeholder="Enter the words" required />
+        <button class="btn-primary" type="submit" asp-page-handler="Count">Count</button>
+        <p>@ViewData["count"]</p>}
 </div>
