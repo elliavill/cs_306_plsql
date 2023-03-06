@@ -8,7 +8,7 @@
    <p>Enter the name to match the last name or contains a variant of that last name</p>
    @using (Html.BeginForm())
    {
-        <input type="text" name="letter_in_last_name" placeholder="Enter the words" required />
-        <button class="btn-primary" type="submit" asp-page-handler="Count">Count</button>
-        <p>@ViewData["count"]</p>}
+      <input type="text" name="letter_in_last_name" placeholder="Enter the words" required />
+      <button class="btn-primary" type="submit" asp-page-handler="Count">Count</button>
+      <p>@ViewData["count"]</p>}
 </div>
