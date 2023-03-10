@@ -3,15 +3,52 @@
 @{
     ViewData["Title"] = "Cursor in PL/SQL";
 }
-
 <div class="text-center">
-   <h1 class="display-4">Instructor Count Project</h1>
-   <h3>by Aurel Villyani</h3>
-   <p>Enter the name to match the last name or contains a variant of that last name</p>
-   @using (Html.BeginForm())
-   {
-      <input type="text" name="get_words" placeholder="Enter the words" required />
-      <button class="btn-primary" type="submit" asp-page-handler="Count">Count</button>
-      <p>@ViewData["count"]</p>
-   }
-</div>
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <h1>@ViewData["Title"]</h1>
+    <h3>Aurel Villyani</h3>
+    <h4>Project 2 Trigger</h4>
+
+    <form method="post">
+        <label for="gradeTypeCode">Grade Type Code:</label>
+        <input name="gradeTypeCode" type="text"><br>
+        <label for="description">Description:</label>
+        <input name="description" type="text"><br>
+        <input name="for_trigger" type="hidden" value="1">
+        <button type="submit" asp-page-handler="AddInformation">Add Information</button>
+        <button type="submit" asp-page-handler="ShowInformation">Show Information</button>
+    </form>
+
+    <h3>Results</h3>
+    <p>@ViewData["myStuff"]</p>
+    <table>
+        @if (ViewData["myStuff"] != null)
+        {
+
+            <tr>
+                <th>Grade Type Code</th>
+                <th>Description</th>
+                <th>Created By</th>
+                <th>Created Date</th>
+                <th>Modified By</th>
+                <th>Modified Date</th>
+                <th>Actions</th>
+            </tr>
+
+            @foreach (System.Data.DataRow row in (ViewData["myStuff"] as System.Data.DataTable).Rows)
+            {
+                <tr>
+                    <td>@row["GRADE_TYPE_CODE"]</td>
+                    <td>@row["DESCRIPTION"]</td>
+                    <td>@row["CREATED_BY"]</td>
+                    <td>@row["CREATED_DATE"]</td>
+                    <td>@row["MODIFIED_BY"]</td>
+                    <td>@row["MODIFIED_DATE"]</td>
+                </tr>
+            }
+
+        }
+    </table>
+</div> 
