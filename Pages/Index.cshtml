@@ -38,10 +38,10 @@
           {
              <tr>
                 <td>
-                   <input style="width:100px" name="updatedGradeTypeCode" type="text" value="@row["GRADE_TYPE_CODE"]"/>
+                   @row["GRADE_TYPE_CODE"]
                 </td>
                 <td>
-                   <input name="updatedDescription" type="text"  value="@row["DESCRIPTION"]"/>
+                   @row["DESCRIPTION"]
                 </td>
                 <td>@row["CREATED_BY"]</td>
                 <td>@row["CREATED_DATE"]</td>
@@ -49,11 +49,9 @@
                 <td>@row["MODIFIED_DATE"]</td>
                 <td>
                    <form method="post">
-                      <input name="editGradeTypeRow" type="hidden" value="@row["GRADE_TYPE_CODE"]">
-                      <input name="updatedGradeTypeCode" type="hidden" />
-                      <input name="updatedDescription" type="hidden" />
-                      <button type="submit" asp-page-handler="EditInformation" asp-route-editGradeTypeRow="@row["GRADE_TYPE_CODE"]">Edit</button>
-                      <input name="gradeTypeRow" type="hidden" value="@row["GRADE_TYPE_CODE"]" />
+                      <input style="width:100px" name="updatedGradeTypeCode" type="text" required />
+                      <input name="updatedDescription" type="text" required/>
+                      <button type="submit" asp-page-handler="EditInformation" asp-route-editGradeTypeRow="@row["GRADE_TYPE_CODE"]">Update</button>
                       <button type="submit" asp-page-handler="DeleteInformation" asp-route-gradeTypeRow="@row["GRADE_TYPE_CODE"]">Delete</button>
                    </form>
                 </td>
