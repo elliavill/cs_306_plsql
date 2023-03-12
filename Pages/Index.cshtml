@@ -53,7 +53,7 @@
                    <td> 
                         <form method="post"> 
                             <input name="gradeTypeRow" type="hidden" value="@row["GRADE_TYPE_CODE"]"> 
-                            <button type="submit" asp-page-handler="EditInformation" asp-route-newGradeTypeRow="@row["GRADE_TYPE_CODE"]">Edit</button> 
+                            <button type="submit" asp-page-handler="EditInformation" asp-route-oldGradeType="@row["GRADE_TYPE_CODE"]">Edit</button> 
                         
                             <input name="gradeTypeRow" type="hidden" value="@row["GRADE_TYPE_CODE"]" />
                             <button type="submit" asp-page-handler="DeleteInformation" asp-route-gradeTypeRow="@row["GRADE_TYPE_CODE"]">Delete</button> 

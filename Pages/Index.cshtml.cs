@@ -59,7 +59,7 @@ namespace DOOM.Pages
             OnPostShowInformation();
         }
 
-        public void OnPostEditInformation(string newGradeTypeCode)
+        public void OnPostEditInformation(string oldGradeType)
         {
             string updatedGradeTypeCode = HttpContext.Request.Form["updatedGradeTypeCode"].ToString();
             string updatedDescription = HttpContext.Request.Form["updatedDescription"].ToString();
@@ -67,10 +67,10 @@ namespace DOOM.Pages
             {
                 con.Open();
                 OracleCommand cmd = con.CreateCommand();
-                cmd.CommandText = "UPDATE GRADE_TYPE SET GRADE_TYPE_CODE = :updatedGradeTypeCode, DESCRIPTION = :updatedDescription WHERE GRADE_TYPE_CODE = :updatedGradeTypeCode";
+                cmd.CommandText = "UPDATE grade_type SET grade_type_code = :updatedGradeTypeCode, description = :updatedDescription WHERE GRADE_TYPE_CODE = :oldGradeType";
                 cmd.Parameters.Add(":updatedGradeTypeCode", updatedGradeTypeCode);
                 cmd.Parameters.Add(":updatedDescription", updatedDescription);
-                cmd.Parameters.Add(":updatedDescription", newGradeTypeCode);
+                cmd.Parameters.Add(":oldGradeType", oldGradeType);
                 cmd.ExecuteNonQuery();
             }
             OnPostShowInformation();
