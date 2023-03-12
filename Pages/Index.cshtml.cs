@@ -59,17 +59,23 @@ namespace DOOM.Pages
             OnPostShowInformation();
         }
 
-        public void OnPostEditInformation(string editGradeTypeRow)
+        public void OnPostEditInformation()
         {
+            string editGradeTypeRow = HttpContext.Request.Form["editGradeTypeRow"];
+            string updatedGradeTypeCode = HttpContext.Request.Form["updatedGradeTypeCode"];
+            string updatedDescription = HttpContext.Request.Form["updatedDescription"];
+
             using (OracleConnection con = new OracleConnection("User ID=cs306_avillyani;Password=StudyDatabaseWithDrSparks;Data Source=CSORACLE"))
             {
                 con.Open();
-                OracleCommand cmd = con.CreateCommand();
-                cmd.CommandText = "UPDATE GRADE_TYPE SET grade_type_code = :updatedGradeTypeCode, description = :updatedDescription, modified_by = USER, modified_date = SYSDATE WHERE grade_type_code = :editGradeTypeRow";
-                cmd.Parameters.Add(":updatedGradeTypeCode", HttpContext.Request.Form["updatedGradeTypeCode"].ToString());
-                cmd.Parameters.Add(":updatedDescription", HttpContext.Request.Form["updatedDescription"].ToString());
-                cmd.Parameters.Add(":editGradeTypeRow", editGradeTypeRow);
-                cmd.ExecuteNonQuery();
+                using (OracleCommand cmd = con.CreateCommand())
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "UPDATE GRADE_TYPE SET GRADE_TYPE_CODE=:gradeTypeCode, DESCRIPTION=:description, WHERE GRADE_TYPE_CODE=:editGradeTypeRow";
+                    cmd.Parameters.Add("gradeTypeCode", updatedGradeTypeCode);
+                    cmd.Parameters.Add("description", updatedDescription);
+                    cmd.Parameters.Add("editGradeTypeRow", editGradeTypeRow);
+                }
             }
             OnPostShowInformation();
         }
