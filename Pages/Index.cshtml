@@ -23,10 +23,9 @@
 
     <h3>Results</h3>
     <p>@ViewData["myStuff"]</p>
-    <table>
+    <table class="center">
         @if (ViewData["myStuff"] != null)
         {
-
             <tr>
                 <th>Grade Type Code</th>
                 <th>Description</th>
@@ -46,9 +45,18 @@
                     <td>@row["CREATED_DATE"]</td>
                     <td>@row["MODIFIED_BY"]</td>
                     <td>@row["MODIFIED_DATE"]</td>
+                    <td>
+                       <form method="post">
+                          <input name="gradeTypeCode" type="hidden" value="@row["GRADE_TYPE_CODE"]">
+                          <button type="submit" asp-page-handler="EditInformation">Edit</button>
+                       </form>
+                       <form method="post">
+                          <input name="gradeTypeCode" type="hidden" value="@row["GRADE_TYPE_CODE"]">
+                          <button type="submit" asp-page-handler="DeleteInformation">Delete</button>
+                       </form>
+                    </td>
                 </tr>
             }
-
         }
     </table>
 </div> 

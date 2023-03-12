@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\aureliavillyani\\Desktop\\Project2\\DOOM.csproj": {}
+    "C:\\Users\\138772\\Desktop\\CS306Project\\DOOM.csproj": {}
   },
   "projects": {
-    "C:\\Users\\aureliavillyani\\Desktop\\Project2\\DOOM.csproj": {
+    "C:\\Users\\138772\\Desktop\\CS306Project\\DOOM.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\aureliavillyani\\Desktop\\Project2\\DOOM.csproj",
+        "projectUniqueName": "C:\\Users\\138772\\Desktop\\CS306Project\\DOOM.csproj",
         "projectName": "DOOM",
-        "projectPath": "C:\\Users\\aureliavillyani\\Desktop\\Project2\\DOOM.csproj",
-        "packagesPath": "C:\\Users\\aureliavillyani\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\aureliavillyani\\Desktop\\Project2\\obj\\",
+        "projectPath": "C:\\Users\\138772\\Desktop\\CS306Project\\DOOM.csproj",
+        "packagesPath": "C:\\Users\\138772\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\138772\\Desktop\\CS306Project\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\aureliavillyani\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\138772\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -55,8 +57,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -68,7 +69,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }
