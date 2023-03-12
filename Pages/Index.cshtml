@@ -4,59 +4,58 @@
     ViewData["Title"] = "Grade Type Managememt";
 }
 <div class="text-center">
-    <h1>@ViewData["Title"]</h1>
-    <h3>Aurel Villyani</h3>
-    <h4>Project 2 Trigger</h4>
+   <h1>@ViewData["Title"]</h1>
+   <h3>Aurel Villyani</h3>
+   <h4>Project 2 Trigger</h4>
 
-    <form method="post">
-        <label for="gradeTypeCode">Grade Type Code:</label>
-        <input name="gradeTypeCode" type="text" required><br>
+   <form method="post">
+      <label for="gradeTypeCode">Grade Type Code:</label>
+      <input name="gradeTypeCode" type="text" required><br>
 
-        <label for="description">Description:</label>
-        <input name="description" type="text" required><br>
+      <label for="description">Description:</label>
+      <input name="description" type="text" required><br>
 
-        <input name="for_trigger" type="hidden" value="1">
-        <button type="submit" asp-page-handler="AddInformation">Add Information</button>
-    </form>
+      <input name="for_trigger" type="hidden" value="1">
+      <button type="submit" asp-page-handler="AddInformation">Add Information</button>
+   </form>
+   <p>@ViewData["errorMessage"]</p>
+   <p>@ViewData["showGradeTypes"]</p>
+   <table class="center">
+      @if (ViewData["showGradeTypes"] != null)
+      {
+         <tr>
+            <th>Grade Type Code</th>
+            <th>Description</th>
+            <th>Created By</th>
+            <th>Created Date</th>
+            <th>Modified By</th>
+            <th>Modified Date</th>
+            <th>Actions</th>
+         </tr>
 
-    <h3>Results</h3>
-    <p>@ViewData["myStuff"]</p>
-    <table class="center">
-       @if (ViewData["myStuff"] != null)
-       {
-          <tr>
-             <th>Grade Type Code</th>
-             <th>Description</th>
-             <th>Created By</th>
-             <th>Created Date</th>
-             <th>Modified By</th>
-             <th>Modified Date</th>
-             <th>Actions</th>
-          </tr>
-
-          @foreach (System.Data.DataRow row in (ViewData["myStuff"] as System.Data.DataTable).Rows)
-          {
-             <tr>
-                <td>
-                   @row["GRADE_TYPE_CODE"]
-                </td>
-                <td>
-                   @row["DESCRIPTION"]
-                </td>
-                <td>@row["CREATED_BY"]</td>
-                <td>@row["CREATED_DATE"]</td>
-                <td>@row["MODIFIED_BY"]</td>
-                <td>@row["MODIFIED_DATE"]</td>
-                <td>
-                   <form method="post">
-                      <input style="width:100px" name="updatedGradeTypeCode" type="text" required />
-                      <input name="updatedDescription" type="text" required/>
-                      <button type="submit" asp-page-handler="EditInformation" asp-route-editGradeTypeRow="@row["GRADE_TYPE_CODE"]">Update</button>
-                      <button type="submit" asp-page-handler="DeleteInformation" asp-route-gradeTypeRow="@row["GRADE_TYPE_CODE"]">Delete</button>
-                   </form>
-                </td>
-             </tr>
-          }
-       }
-    </table>
+         @foreach (System.Data.DataRow row in (ViewData["showGradeTypes"] as System.Data.DataTable).Rows)
+         {
+            <tr>
+               <td>
+                  @row["GRADE_TYPE_CODE"]
+               </td>
+               <td>
+                  @row["DESCRIPTION"]
+               </td>
+               <td>@row["CREATED_BY"]</td>
+               <td>@row["CREATED_DATE"]</td>
+               <td>@row["MODIFIED_BY"]</td>
+               <td>@row["MODIFIED_DATE"]</td>
+               <td>
+                  <form method="post">
+                     <input style="width:100px" name="updatedGradeTypeCode" type="text" />
+                     <input name="updatedDescription" type="text" />
+                     <button type="submit" asp-page-handler="EditInformation" asp-route-editGradeTypeRow="@row["GRADE_TYPE_CODE"]">Update</button>
+                     <button type="submit" asp-page-handler="DeleteInformation" asp-route-gradeTypeRow="@row["GRADE_TYPE_CODE"]">Delete</button>
+                  </form>
+               </td>
+            </tr>
+         }
+      }
+   </table>
 </div> 

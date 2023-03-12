@@ -28,7 +28,7 @@ namespace DOOM.Pages
                 OracleDataAdapter oda = new OracleDataAdapter(cmd);
                 DataSet dt = new DataSet();
                 oda.Fill(dt);
-                ViewData["myStuff"] = dt.Tables[0];
+                ViewData["showGradeTypes"] = dt.Tables[0];
             }
         }
 
@@ -64,20 +64,24 @@ namespace DOOM.Pages
             string updatedGradeTypeCode = HttpContext.Request.Form["updatedGradeTypeCode"];
             string updatedDescription = HttpContext.Request.Form["updatedDescription"];
 
-            using (OracleConnection con = new OracleConnection("User ID=cs306_avillyani;Password=StudyDatabaseWithDrSparks;Data Source=CSORACLE"))
+            try
             {
-                con.Open();
-                using (OracleCommand cmd = con.CreateCommand())
+                using (OracleConnection con = new OracleConnection("User ID=cs306_avillyani;Password=StudyDatabaseWithDrSparks;Data Source=CSORACLE"))
                 {
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = "UPDATE GRADE_TYPE SET GRADE_TYPE_CODE=:gradeTypeCode, DESCRIPTION=:description WHERE GRADE_TYPE_CODE=:editGradeTypeRow";
-                    cmd.Parameters.Add(":gradeTypeCode", updatedGradeTypeCode);
-                    cmd.Parameters.Add(":description", updatedDescription);
+                    con.Open();
+                    OracleCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "UPDATE GRADE_TYPE SET GRADE_TYPE_CODE=:updatedGradeTypeCode, DESCRIPTION=:updatedDescription WHERE GRADE_TYPE_CODE=:editGradeTypeRow";
+                    cmd.Parameters.Add(":updatedGradeTypeCode", updatedGradeTypeCode);
+                    cmd.Parameters.Add(":updatedDescription", updatedDescription);
                     cmd.Parameters.Add(":editGradeTypeRow", editGradeTypeRow);
                     cmd.ExecuteNonQuery();
                 }
-                OnPostShowInformation();
             }
+            catch
+            {
+                ViewData["errorMessage"] = "GRADE_TYPE_CODE or DESCRIPTION cannot be empty.";
+            }
+            OnPostShowInformation();
         }
     }
 }
