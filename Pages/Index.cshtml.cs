@@ -58,5 +58,22 @@ namespace DOOM.Pages
             }
             OnPostShowInformation();
         }
+
+        public void OnPostEditInformation(string newGradeTypeCode)
+        {
+            string updatedGradeTypeCode = HttpContext.Request.Form["updatedGradeTypeCode"].ToString();
+            string updatedDescription = HttpContext.Request.Form["updatedDescription"].ToString();
+            using (OracleConnection con = new OracleConnection("User ID=cs306_avillyani;Password=StudyDatabaseWithDrSparks;Data Source=CSORACLE"))
+            {
+                con.Open();
+                OracleCommand cmd = con.CreateCommand();
+                cmd.CommandText = "UPDATE GRADE_TYPE SET GRADE_TYPE_CODE = :updatedGradeTypeCode, DESCRIPTION = :updatedDescription WHERE GRADE_TYPE_CODE = :updatedGradeTypeCode";
+                cmd.Parameters.Add(":updatedGradeTypeCode", updatedGradeTypeCode);
+                cmd.Parameters.Add(":updatedDescription", updatedDescription);
+                cmd.Parameters.Add(":updatedDescription", newGradeTypeCode);
+                cmd.ExecuteNonQuery();
+            }
+            OnPostShowInformation();
+        }
     }
 }

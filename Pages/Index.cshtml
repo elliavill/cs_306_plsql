@@ -4,9 +4,6 @@
     ViewData["Title"] = "Grade Type Managememt";
 }
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-
     <h1>@ViewData["Title"]</h1>
     <h3>Aurel Villyani</h3>
     <h4>Project 2 Trigger</h4>
@@ -41,26 +38,27 @@
             @foreach (System.Data.DataRow row in (ViewData["myStuff"] as System.Data.DataTable).Rows)
             {
                 <tr>
-                    <td>
-                        @row["GRADE_TYPE_CODE"] <br /> 
-                        <input style="width:100px" name="gradeTypeCode" type="text"><br>
-                    </td>
-                    <td>
-                         @row["DESCRIPTION"] <br />
-                         <input name="gradeTypeCode" type="text"></td>
-                    <td>@row["CREATED_BY"]</td>
-                    <td>@row["CREATED_DATE"]</td>
-                    <td>@row["MODIFIED_BY"]</td>
-                    <td>@row["MODIFIED_DATE"]</td>
-                    <td> 
+                   <td> 
+                      @row["GRADE_TYPE_CODE"] <br/> 
+                      <input style="width:100px" name="updatedGradeTypeCode" type="text" /> 
+                   </td> 
+                   <td>
+                      @row["DESCRIPTION"] <br/> 
+                      <input name="updatedDescription" type="text" /> 
+                   </td> 
+                   <td>@row["CREATED_BY"]</td>
+                   <td>@row["CREATED_DATE"]</td>
+                   <td>@row["MODIFIED_BY"]</td>
+                   <td>@row["MODIFIED_DATE"]</td>
+                   <td> 
                         <form method="post"> 
                             <input name="gradeTypeRow" type="hidden" value="@row["GRADE_TYPE_CODE"]"> 
-                            <button type="submit" asp-page-handler="EditInformation">Edit</button> 
+                            <button type="submit" asp-page-handler="EditInformation" asp-route-newGradeTypeRow="@row["GRADE_TYPE_CODE"]">Edit</button> 
                         
                             <input name="gradeTypeRow" type="hidden" value="@row["GRADE_TYPE_CODE"]" />
                             <button type="submit" asp-page-handler="DeleteInformation" asp-route-gradeTypeRow="@row["GRADE_TYPE_CODE"]">Delete</button> 
                         </form> 
-                    </td> 
+                   </td> 
                 </tr>
             }
         }
