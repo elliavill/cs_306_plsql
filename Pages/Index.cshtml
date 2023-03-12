@@ -1,7 +1,7 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Cursor in PL/SQL";
+    ViewData["Title"] = "Grade Type Managememt";
 }
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
@@ -41,22 +41,26 @@
             @foreach (System.Data.DataRow row in (ViewData["myStuff"] as System.Data.DataTable).Rows)
             {
                 <tr>
-                    <td>@row["GRADE_TYPE_CODE"]</td>
-                    <td>@row["DESCRIPTION"]</td>
+                    <td>
+                        @row["GRADE_TYPE_CODE"] <br /> 
+                        <input style="width:100px" name="gradeTypeCode" type="text"><br>
+                    </td>
+                    <td>
+                         @row["DESCRIPTION"] <br />
+                         <input name="gradeTypeCode" type="text"></td>
                     <td>@row["CREATED_BY"]</td>
                     <td>@row["CREATED_DATE"]</td>
                     <td>@row["MODIFIED_BY"]</td>
                     <td>@row["MODIFIED_DATE"]</td>
-                    <td>
-                       <form method="post">
-                          <input name="gradeTypeCode" type="hidden" value="@row["GRADE_TYPE_CODE"]">
-                          <button type="submit" asp-page-handler="EditInformation">Edit</button>
-                       </form>
-                       <form method="post">
-                          <input name="gradeTypeCode" type="hidden" value="@row["GRADE_TYPE_CODE"]">
-                          <button type="submit" asp-page-handler="DeleteInformation" asp-route-id="@row["GRADE_TYPE_CODE"]">Delete</button>
-                       </form>
-                    </td>
+                    <td> 
+                        <form method="post"> 
+                            <input name="gradeTypeRow" type="hidden" value="@row["GRADE_TYPE_CODE"]"> 
+                            <button type="submit" asp-page-handler="EditInformation">Edit</button> 
+                        
+                            <input name="gradeTypeRow" type="hidden" value="@row["GRADE_TYPE_CODE"]" />
+                            <button type="submit" asp-page-handler="DeleteInformation" asp-route-gradeTypeRow="@row["GRADE_TYPE_CODE"]">Delete</button> 
+                        </form> 
+                    </td> 
                 </tr>
             }
         }

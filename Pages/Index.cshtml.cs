@@ -46,14 +46,14 @@ namespace DOOM.Pages
             OnPostShowInformation();
         }
 
-        public void OnPostDeleteInformation(string id)
+        public void OnPostDeleteInformation(string gradeTypeRow)
         {
             using (OracleConnection con = new OracleConnection("User ID=cs306_avillyani;Password=StudyDatabaseWithDrSparks;Data Source=CSORACLE"))
             {
                 con.Open();
                 OracleCommand cmd = con.CreateCommand();
-                cmd.CommandText = "DELETE FROM GRADE_TYPE WHERE GRADE_TYPE_CODE = :id";
-                cmd.Parameters.Add(":id", HttpContext.Request.Form["id"].ToString());
+                cmd.CommandText = "DELETE FROM GRADE_TYPE WHERE GRADE_TYPE_CODE = :gradeTypeRow";
+                cmd.Parameters.Add(":gradeTypeRow", gradeTypeRow);
                 cmd.ExecuteNonQuery();
             }
             OnPostShowInformation();
