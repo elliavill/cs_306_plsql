@@ -15,6 +15,7 @@ namespace DOOM.Pages
 
         public void OnGet()
         {
+            
         }
 
         public void OnPostShowInformation()
@@ -29,6 +30,33 @@ namespace DOOM.Pages
                 oda.Fill(dt);
                 ViewData["myStuff"] = dt.Tables[0];
             }
+        }
+
+        public void OnPostAddInformation(string gradeTypeCode, string description)
+        {
+            using (OracleConnection con = new OracleConnection("User ID=cs306_avillyani;Password=StudyDatabaseWithDrSparks;Data Source=CSORACLE"))
+            {
+                con.Open();
+                OracleCommand cmd = con.CreateCommand();
+                cmd.CommandText = "INSERT INTO GRADE_TYPE(GRADE_TYPE_CODE, DESCRIPTION) VALUES (:gradeTypeCode, :description)";
+                cmd.Parameters.Add(":gradeTypeCode", HttpContext.Request.Form["gradeTypeCode"].ToString());
+                cmd.Parameters.Add(":description", HttpContext.Request.Form["description"].ToString());
+                cmd.ExecuteNonQuery();
+            }
+            OnPostShowInformation();
+        }
+
+        public void OnPostDeleteInformation(string id)
+        {
+            using (OracleConnection con = new OracleConnection("User ID=cs306_avillyani;Password=StudyDatabaseWithDrSparks;Data Source=CSORACLE"))
+            {
+                con.Open();
+                OracleCommand cmd = con.CreateCommand();
+                cmd.CommandText = "DELETE FROM GRADE_TYPE WHERE GRADE_TYPE_CODE = :id";
+                cmd.Parameters.Add(":id", HttpContext.Request.Form["id"].ToString());
+                cmd.ExecuteNonQuery();
+            }
+            OnPostShowInformation();
         }
     }
 }
