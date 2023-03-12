@@ -10,14 +10,13 @@
 
     <form method="post">
         <label for="gradeTypeCode">Grade Type Code:</label>
-        <input name="gradeTypeCode" type="text"><br>
+        <input name="gradeTypeCode" type="text" required><br>
 
         <label for="description">Description:</label>
-        <input name="description" type="text"><br>
+        <input name="description" type="text" required><br>
 
         <input name="for_trigger" type="hidden" value="1">
         <button type="submit" asp-page-handler="AddInformation">Add Information</button>
-        <button type="submit" asp-page-handler="ShowInformation">Show Information</button>
     </form>
 
     <h3>Results</h3>
@@ -51,13 +50,15 @@
                    <td>@row["MODIFIED_BY"]</td>
                    <td>@row["MODIFIED_DATE"]</td>
                    <td> 
-                        <form method="post"> 
-                            <input name="gradeTypeRow" type="hidden" value="@row["GRADE_TYPE_CODE"]"> 
-                            <button type="submit" asp-page-handler="EditInformation" asp-route-oldGradeType="@row["GRADE_TYPE_CODE"]">Edit</button> 
-                        
-                            <input name="gradeTypeRow" type="hidden" value="@row["GRADE_TYPE_CODE"]" />
-                            <button type="submit" asp-page-handler="DeleteInformation" asp-route-gradeTypeRow="@row["GRADE_TYPE_CODE"]">Delete</button> 
-                        </form> 
+                      <form method="post">
+                         <input name="editGradeTypeRow" type="hidden" value="@row["GRADE_TYPE_CODE"]">
+                         <input name="updatedGradeTypeCode" type="hidden" />
+                         <input name="updatedDescription" type="hidden" />
+                         <button type="submit" asp-page-handler="EditInformation" asp-route-editGradeTypeRow="@row["GRADE_TYPE_CODE"]">Edit</button>
+
+                         <input name="gradeTypeRow" type="hidden" value="@row["GRADE_TYPE_CODE"]" />
+                         <button type="submit" asp-page-handler="DeleteInformation" asp-route-gradeTypeRow="@row["GRADE_TYPE_CODE"]">Delete</button>
+                      </form> 
                    </td> 
                 </tr>
             }
