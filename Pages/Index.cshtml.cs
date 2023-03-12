@@ -65,16 +65,29 @@ namespace DOOM.Pages
             string updatedGradeTypeCode = HttpContext.Request.Form["updatedGradeTypeCode"];
             string updatedDescription = HttpContext.Request.Form["updatedDescription"];
 
-            using (OracleConnection con = new OracleConnection("User ID=cs306_avillyani;Password=StudyDatabaseWithDrSparks;Data Source=CSORACLE"))
+            // Check if the DataTable is not null and contains any rows 
+            if (ViewData["myStuff"] != null && (ViewData["myStuff"] as DataTable).Rows.Count > 0)
             {
-                con.Open();
-                using (OracleCommand cmd = con.CreateCommand())
+                // Loop through the DataTable to find the row to update 
+                foreach (DataRow row in (ViewData["myStuff"] as DataTable).Rows)
                 {
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = "UPDATE GRADE_TYPE SET GRADE_TYPE_CODE=:gradeTypeCode, DESCRIPTION=:description, WHERE GRADE_TYPE_CODE=:editGradeTypeRow";
-                    cmd.Parameters.Add("gradeTypeCode", updatedGradeTypeCode);
-                    cmd.Parameters.Add("description", updatedDescription);
-                    cmd.Parameters.Add("editGradeTypeRow", editGradeTypeRow);
+                    if (row["GRADE_TYPE_CODE"].ToString() == editGradeTypeRow)
+                    {
+                        using (OracleConnection con = new OracleConnection("User ID=cs306_avillyani;Password=StudyDatabaseWithDrSparks;Data Source=CSORACLE"))
+                        {
+                            con.Open();
+                            using (OracleCommand cmd = con.CreateCommand())
+                            {
+                                cmd.CommandType = CommandType.Text;
+                                cmd.CommandText = "UPDATE GRADE_TYPE SET GRADE_TYPE_CODE=:gradeTypeCode, DESCRIPTION=:description WHERE GRADE_TYPE_CODE=:editGradeTypeRow"; 
+                                cmd.Parameters.Add(":updatedGradeTypeCode", updatedGradeTypeCode);
+                                cmd.Parameters.Add(":updatedDescription", updatedDescription);
+                                cmd.Parameters.Add(":gradeTypeCode", editGradeTypeRow);
+                                cmd.ExecuteNonQuery();
+                            }
+                        }
+                        break;
+                    }
                 }
             }
             OnPostShowInformation();
