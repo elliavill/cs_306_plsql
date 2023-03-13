@@ -50,11 +50,24 @@ namespace DOOM.Pages
         {
             using (OracleConnection con = new OracleConnection("User ID=cs306_avillyani;Password=StudyDatabaseWithDrSparks;Data Source=CSORACLE"))
             {
-                con.Open();
-                OracleCommand cmd = con.CreateCommand();
-                cmd.CommandText = "DELETE FROM GRADE_TYPE WHERE GRADE_TYPE_CODE = :gradeTypeRow";
-                cmd.Parameters.Add(":gradeTypeRow", gradeTypeRow);
-                cmd.ExecuteNonQuery();
+                try
+                {
+                    con.Open();
+                    OracleCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "DELETE FROM GRADE_TYPE WHERE GRADE_TYPE_CODE = :gradeTypeRow";
+                    cmd.Parameters.Add(":gradeTypeRow", gradeTypeRow);
+                    cmd.ExecuteNonQuery();
+                }
+                catch
+                {
+                    ViewData["errorMessage"] = "cannot delete the record.";
+                    OnPostShowInformation();
+                }
+                finally
+                {
+                    con.Close();
+                }
+
             }
             OnPostShowInformation();
         }
@@ -64,10 +77,17 @@ namespace DOOM.Pages
             string updatedGradeTypeCode = HttpContext.Request.Form["updatedGradeTypeCode"];
             string updatedDescription = HttpContext.Request.Form["updatedDescription"];
 
-            try
+            // Check if the grade type code can be updated
+            if (updatedGradeTypeCode == "FI" || updatedGradeTypeCode == "HM" || updatedGradeTypeCode == "MY" ||
+                updatedGradeTypeCode == "PA" || updatedGradeTypeCode == "PJ" || updatedGradeTypeCode == "QZ")
             {
-                using (OracleConnection con = new OracleConnection("User ID=cs306_avillyani;Password=StudyDatabaseWithDrSparks;Data Source=CSORACLE"))
+                ViewData["errorMessage"] = "The selected grade type code cannot be updated.";
+            }
+            using (OracleConnection con = new OracleConnection("User ID=cs306_avillyani;Password=StudyDatabaseWithDrSparks;Data Source=CSORACLE"))
+            {
+                try
                 {
+               
                     con.Open();
                     OracleCommand cmd = con.CreateCommand();
                     cmd.CommandText = "UPDATE GRADE_TYPE SET GRADE_TYPE_CODE=:updatedGradeTypeCode, DESCRIPTION=:updatedDescription WHERE GRADE_TYPE_CODE=:editGradeTypeRow";
@@ -76,10 +96,14 @@ namespace DOOM.Pages
                     cmd.Parameters.Add(":editGradeTypeRow", editGradeTypeRow);
                     cmd.ExecuteNonQuery();
                 }
-            }
-            catch
-            {
-                ViewData["errorMessage"] = "GRADE_TYPE_CODE or DESCRIPTION cannot be empty.";
+                catch
+                {
+                    ViewData["errorMessage"] = "GRADE_TYPE_CODE or DESCRIPTION cannot be empty.";
+                }
+                finally
+                {
+                    con.Close();
+                }
             }
             OnPostShowInformation();
         }

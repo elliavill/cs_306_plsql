@@ -3,10 +3,10 @@
 @{
     ViewData["Title"] = "Grade Type Managememt";
 }
-<div class="text-center">
+<div class="form text-center">
    <h1>@ViewData["Title"]</h1>
    <h3>Aurel Villyani</h3>
-   <h4>Project 2 Trigger</h4>
+   <h6>Project 2 - Trigger &Aacute; ASP.NET</h6>
 
    <form method="post">
       <label for="gradeTypeCode">Grade Type Code:</label>
@@ -15,11 +15,18 @@
       <label for="description">Description:</label>
       <input name="description" type="text" required><br>
 
-      <input name="for_trigger" type="hidden" value="1">
       <button type="submit" asp-page-handler="AddInformation">Add Information</button>
    </form>
-   <p>@ViewData["errorMessage"]</p>
-   <p>@ViewData["showGradeTypes"]</p>
+   
+   @* Show error message if the user does not put required field. *@
+   @if(@ViewData["errorMessage"] != null) 
+   { 
+      <p id="errors">@ViewData["errorMessage"]</p>
+   }
+
+   @* Generated a table that show GRADE_TYPE table informaion. 
+      The user then can also takes action such as updating or deletin a row
+       *@
    <table class="center">
       @if (ViewData["showGradeTypes"] != null)
       {
@@ -48,9 +55,9 @@
                <td>@row["MODIFIED_DATE"]</td>
                <td>
                   <form method="post">
-                     <input style="width:100px" name="updatedGradeTypeCode" type="text" />
-                     <input name="updatedDescription" type="text" />
-                     <button type="submit" asp-page-handler="EditInformation" asp-route-editGradeTypeRow="@row["GRADE_TYPE_CODE"]">Update</button>
+                     <input name="updatedGradeTypeCode" type="text" placeholder="Grade Type Code" id="updatedGTC"/>
+                     <input name="updatedDescription" type="text" placeholder="Description" />
+                     <button type="submit" asp-page-handler="EditInformation" name="delete" asp-route-editGradeTypeRow="@row["GRADE_TYPE_CODE"]">Update</button>
                      <button type="submit" asp-page-handler="DeleteInformation" asp-route-gradeTypeRow="@row["GRADE_TYPE_CODE"]">Delete</button>
                   </form>
                </td>
