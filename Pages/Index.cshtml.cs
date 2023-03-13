@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Oracle.ManagedDataAccess.Client;
@@ -22,13 +22,24 @@ namespace DOOM.Pages
         {
             using (OracleConnection con = new OracleConnection("User ID=cs306_avillyani;Password=StudyDatabaseWithDrSparks;Data Source=CSORACLE"))
             {
-                con.Open();
-                OracleCommand cmd = con.CreateCommand();
-                cmd.CommandText = "SELECT * FROM GRADE_TYPE";
-                OracleDataAdapter oda = new OracleDataAdapter(cmd);
-                DataSet dt = new DataSet();
-                oda.Fill(dt);
-                ViewData["showGradeTypes"] = dt.Tables[0];
+                try
+                {
+                   con.Open();
+                   OracleCommand cmd = con.CreateCommand();
+                   cmd.CommandText = "SELECT * FROM GRADE_TYPE";
+                   OracleDataAdapter oda = new OracleDataAdapter(cmd);
+                   DataSet dt = new DataSet();
+                   oda.Fill(dt);
+                   ViewData["showGradeTypes"] = dt.Tables[0];
+                }
+                catch
+                {
+                   ViewData["errorMessage"] = "Cannot load information,";
+                }
+                finally
+                {
+                   con.Close();
+                }
             }
         }
 
@@ -36,12 +47,24 @@ namespace DOOM.Pages
         {
             using (OracleConnection con = new OracleConnection("User ID=cs306_avillyani;Password=StudyDatabaseWithDrSparks;Data Source=CSORACLE"))
             {
-                con.Open();
-                OracleCommand cmd = con.CreateCommand();
-                cmd.CommandText = "INSERT INTO GRADE_TYPE(GRADE_TYPE_CODE, DESCRIPTION) VALUES (:gradeTypeCode, :description)";
-                cmd.Parameters.Add(":gradeTypeCode", HttpContext.Request.Form["gradeTypeCode"].ToString());
-                cmd.Parameters.Add(":description", HttpContext.Request.Form["description"].ToString());
-                cmd.ExecuteNonQuery();
+                try
+                {
+                   con.Open();
+                   OracleCommand cmd = con.CreateCommand();
+                   cmd.CommandText = "INSERT INTO GRADE_TYPE(GRADE_TYPE_CODE, DESCRIPTION) VALUES (:gradeTypeCode, :description)";
+                   cmd.Parameters.Add(":gradeTypeCode", HttpContext.Request.Form["gradeTypeCode"].ToString());
+                   cmd.Parameters.Add(":description", HttpContext.Request.Form["description"].ToString());
+                   cmd.ExecuteNonQuery();
+                }
+                catch
+                {
+                    ViewData["errorMessage"] = "Cannot add data. The data is already exist.";
+                    OnPostShowInformation();
+                }
+                finally
+                {
+                    con.Close();
+                }
             }
             OnPostShowInformation();
         }
@@ -60,7 +83,7 @@ namespace DOOM.Pages
                 }
                 catch
                 {
-                    ViewData["errorMessage"] = "cannot delete the record.";
+                    ViewData["errorMessage"] = "Cannot delete the record.";
                     OnPostShowInformation();
                 }
                 finally
@@ -87,7 +110,6 @@ namespace DOOM.Pages
             {
                 try
                 {
-               
                     con.Open();
                     OracleCommand cmd = con.CreateCommand();
                     cmd.CommandText = "UPDATE GRADE_TYPE SET GRADE_TYPE_CODE=:updatedGradeTypeCode, DESCRIPTION=:updatedDescription WHERE GRADE_TYPE_CODE=:editGradeTypeRow";
@@ -99,6 +121,7 @@ namespace DOOM.Pages
                 catch
                 {
                     ViewData["errorMessage"] = "GRADE_TYPE_CODE or DESCRIPTION cannot be empty.";
+                    OnPostShowInformation();
                 }
                 finally
                 {
