@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "nvLeF9ggKAFJVBzq6T2vWf0UUW/Nh+442BX30GapviHbBGP6e51Cb727BtoKkbz5gkktVzDrjhX0dGqbToZm5g==",
+  "dgSpecHash": "7o1P8iBC08ZPH3gOmKhm4a9VJFXxLs9Ql54vl78lKW4VXyTUFvGS+2hSszcEv2HeNKj35SpBKIzVQt9QwsNavQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\138772\\Desktop\\CS306Project\\DOOM.csproj",
+  "projectFilePath": "C:\\Users\\138772\\Desktop\\cs30\\Naurrr.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\138772\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.4\\microsoft.netcore.platforms.5.0.4.nupkg.sha512",
     "C:\\Users\\138772\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",

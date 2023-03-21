@@ -808,11 +808,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\138772\\Desktop\\CS306Project\\DOOM.csproj",
-      "projectName": "DOOM",
-      "projectPath": "C:\\Users\\138772\\Desktop\\CS306Project\\DOOM.csproj",
+      "projectUniqueName": "C:\\Users\\138772\\Desktop\\cs30\\Naurrr.csproj",
+      "projectName": "Naurrr",
+      "projectPath": "C:\\Users\\138772\\Desktop\\cs30\\Naurrr.csproj",
       "packagesPath": "C:\\Users\\138772\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\138772\\Desktop\\CS306Project\\obj\\",
+      "outputPath": "C:\\Users\\138772\\Desktop\\cs30\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
