@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:5165",
+      "applicationUrl": "http://localhost:61577",
       "sslPort": 0
     }
   },
@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "DOOM": {
+    "Package": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,

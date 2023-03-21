@@ -1,68 +1,10 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Grade Type Managememt";
+    ViewData["Title"] = "Home page";
 }
-<div class="form text-center">
-   <h1>@ViewData["Title"]</h1>
-   <h3>Aurel Villyani</h3>
-   <h6>Project 2 - Trigger &Aacute; ASP.NET</h6>
 
-   <form method="post">
-      <label for="gradeTypeCode">Grade Type Code:</label>
-      <input name="gradeTypeCode" type="text" required><br>
-
-      <label for="description">Description:</label>
-      <input name="description" type="text" required><br>
-
-      <button type="submit" asp-page-handler="AddInformation">Add Information</button>
-   </form>
-   
-   @* Show error message if the user does not put required field. *@
-   @if(@ViewData["errorMessage"] != null) 
-   { 
-      <p id="errors">@ViewData["errorMessage"]</p>
-   }
-
-   @* Generated a table that show GRADE_TYPE table informaion. 
-      The user then can also takes action such as updating or deletin a row
-       *@
-   <table class="center">
-      @if (ViewData["showGradeTypes"] != null)
-      {
-         <tr>
-            <th>Grade Type Code</th>
-            <th>Description</th>
-            <th>Created By</th>
-            <th>Created Date</th>
-            <th>Modified By</th>
-            <th>Modified Date</th>
-            <th>Actions</th>
-         </tr>
-
-         @foreach (System.Data.DataRow row in (ViewData["showGradeTypes"] as System.Data.DataTable).Rows)
-         {
-            <tr>
-               <td>
-                  @row["GRADE_TYPE_CODE"]
-               </td>
-               <td>
-                  @row["DESCRIPTION"]
-               </td>
-               <td>@row["CREATED_BY"]</td>
-               <td>@row["CREATED_DATE"]</td>
-               <td>@row["MODIFIED_BY"]</td>
-               <td>@row["MODIFIED_DATE"]</td>
-               <td>
-                  <form method="post">
-                     <input name="updatedGradeTypeCode" type="text" placeholder="Grade Type Code" id="updatedGTC"/>
-                     <input name="updatedDescription" type="text" placeholder="Description" />
-                     <button type="submit" asp-page-handler="EditInformation" name="delete" asp-route-editGradeTypeRow="@row["GRADE_TYPE_CODE"]">Update</button>
-                     <button type="submit" asp-page-handler="DeleteInformation" asp-route-gradeTypeRow="@row["GRADE_TYPE_CODE"]">Delete</button>
-                  </form>
-               </td>
-            </tr>
-         }
-      }
-   </table>
-</div> 
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>

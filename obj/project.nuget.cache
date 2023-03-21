@@ -1,25 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "nvLeF9ggKAFJVBzq6T2vWf0UUW/Nh+442BX30GapviHbBGP6e51Cb727BtoKkbz5gkktVzDrjhX0dGqbToZm5g==",
+  "dgSpecHash": "8GLnbApTc+BYGvA0lSoRo1owIDPcivkMat6aYhgVMvyiOPfnHQPNZQ/DpOy90kL25nkhArIzOqutnkw0+5+dQg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\138772\\Desktop\\CS306Project\\DOOM.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\138772\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.4\\microsoft.netcore.platforms.5.0.4.nupkg.sha512",
-    "C:\\Users\\138772\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",
-    "C:\\Users\\138772\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
-    "C:\\Users\\138772\\.nuget\\packages\\oracle.manageddataaccess.core\\3.21.90\\oracle.manageddataaccess.core.3.21.90.nupkg.sha512",
-    "C:\\Users\\138772\\.nuget\\packages\\system.configuration.configurationmanager\\6.0.0\\system.configuration.configurationmanager.6.0.0.nupkg.sha512",
-    "C:\\Users\\138772\\.nuget\\packages\\system.diagnostics.performancecounter\\6.0.0\\system.diagnostics.performancecounter.6.0.0.nupkg.sha512",
-    "C:\\Users\\138772\\.nuget\\packages\\system.directoryservices\\5.0.0\\system.directoryservices.5.0.0.nupkg.sha512",
-    "C:\\Users\\138772\\.nuget\\packages\\system.directoryservices.protocols\\5.0.1\\system.directoryservices.protocols.5.0.1.nupkg.sha512",
-    "C:\\Users\\138772\\.nuget\\packages\\system.drawing.common\\6.0.0\\system.drawing.common.6.0.0.nupkg.sha512",
-    "C:\\Users\\138772\\.nuget\\packages\\system.io.filesystem.accesscontrol\\5.0.0\\system.io.filesystem.accesscontrol.5.0.0.nupkg.sha512",
-    "C:\\Users\\138772\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",
-    "C:\\Users\\138772\\.nuget\\packages\\system.security.accesscontrol\\6.0.0\\system.security.accesscontrol.6.0.0.nupkg.sha512",
-    "C:\\Users\\138772\\.nuget\\packages\\system.security.cryptography.protecteddata\\6.0.0\\system.security.cryptography.protecteddata.6.0.0.nupkg.sha512",
-    "C:\\Users\\138772\\.nuget\\packages\\system.security.permissions\\6.0.0\\system.security.permissions.6.0.0.nupkg.sha512",
-    "C:\\Users\\138772\\.nuget\\packages\\system.security.principal.windows\\5.0.0\\system.security.principal.windows.5.0.0.nupkg.sha512",
-    "C:\\Users\\138772\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512"
-  ],
+  "projectFilePath": "C:\\Users\\138772\\Desktop\\Package\\Package.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }
