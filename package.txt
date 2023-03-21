@@ -1,0 +1,177 @@
+GET_GPA_POINT FUNCTION WOULD BE:
+create or replace FUNCTION get_gpa_point(p_grade_number IN NUMBER)
+RETURN NUMBER
+IS
+  gpa_point NUMBER(3,2);
+BEGIN
+  SELECT grade_point INTO gpa_point
+  FROM grade_conversion
+  WHERE floor(p_grade_number) BETWEEN MIN_GRADE AND MAX_GRADE;
+
+  RETURN gpa_point;
+EXCEPTION
+  WHEN NO_DATA_FOUND THEN
+    RETURN NULL;
+END;
+
+============================================
+
+get_LETTER_GRADE FUNCTION WOULD BE:
+create or replace FUNCTION get_letter_grade(p_grade_number NUMBER)
+RETURN VARCHAR2
+IS
+  v_letter_grade VARCHAR2(2);
+BEGIN
+  SELECT LETTER_GRADE INTO v_letter_grade
+  FROM GRADE_CONVERSION
+  WHERE floor(p_grade_number) BETWEEN MIN_GRADE AND MAX_GRADE;
+
+  RETURN v_letter_grade;
+EXCEPTION
+  WHEN NO_DATA_FOUND THEN
+    RETURN NULL;
+END;
+
+====================================================
+tHIS IS PACKAGE SPECIFICATION
+create or replace PACKAGE STUDENT_REPORTS 
+AS
+  -- Declare the report date global variable
+  g_report_date DATE;
+
+  -- Define the function to get letter grade
+  FUNCTION get_letter_grade(p_grade_number NUMBER)
+    RETURN VARCHAR2;
+
+  -- Define the function to get GPA point
+  FUNCTION get_gpa_point(p_grade_number NUMBER)
+    RETURN NUMBER;
+
+  -- Define the procedure to generate an HTML table report of student classes
+  -- generate_student_class_report(p_student_id NUMBER);
+
+  -- Define the procedure to generate an HTML dropdown list of students and their GPAs
+  --PROCEDURE generate_student_gpa_dropdown(p_name VARCHAR2, p_id VARCHAR2);
+END;
+
+============================================================
+tHIS IS THE PACKAGE BODY
+create or replace PACKAGE BODY STUDENT_REPORTS AS
+  -- Define the function to get letter grade
+  FUNCTION get_letter_grade(p_grade_number NUMBER)
+  RETURN VARCHAR2
+  IS
+    v_letter_grade VARCHAR2(2);
+  BEGIN
+    SELECT LETTER_GRADE INTO v_letter_grade
+    FROM GRADE_CONVERSION
+    WHERE p_grade_number BETWEEN MIN_GRADE AND MAX_GRADE;
+    RETURN v_letter_grade;
+  EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+      RETURN NULL;
+  END get_letter_grade;
+
+  -- Define the function to get GPA point
+  FUNCTION get_gpa_point(p_grade_number NUMBER)
+  RETURN NUMBER
+  IS
+    gpa_point NUMBER(3,2);
+  BEGIN
+    SELECT grade_point INTO gpa_point
+    FROM grade_conversion
+    WHERE floor(p_grade_number) BETWEEN MIN_GRADE AND MAX_GRADE;
+    RETURN gpa_point;
+  EXCEPTION
+      WHEN NO_DATA_FOUND THEN
+      RETURN NULL;
+  END get_gpa_point;
+  -- Define other functions and procedures here
+END;
+==============================
+THIS IS THE PROCEDURE I STILL WORKING ON
+CREATE OR REPLACE PROCEDURE generate_student_dropdown(
+    in_student_id IN student.student_id%TYPE,
+    out_result OUT VARCHAR2
+)
+IS
+    v_html VARCHAR2(32767) := '';
+BEGIN
+    FOR r IN (
+        SELECT section.section_id AS option_value, 
+               section.description || ' (' || AVG(grade.numeric_grade) || ')' AS display_text
+        FROM course 
+        JOIN section USING (course_no)  
+        JOIN grade USING (section_id)   
+        JOIN student USING (student_id)
+        WHERE student.student_id = in_student_id
+        GROUP BY section.section_id, section.description
+        ORDER BY section.description, section.section_id
+    )
+    LOOP
+        v_html := v_html || '<option value="' || r.option_value || '">' || r.display_text || '</option>';
+    END LOOP;
+    out_result := '<select>' || v_html || '</select>';
+END;
+
+
+==========================
+THE PROCEDURE WORKING
+CREATE OR REPLACE PROCEDURE get_student_grade_report(
+    p_student_id IN NUMBER,
+    p_report_date IN DATE,
+    p_output OUT VARCHAR2
+)
+IS
+  v_output VARCHAR2(32767);
+BEGIN
+  -- Start building the HTML table
+  v_output := '<table>';
+  v_output := v_output || '<tr><td colspan="6">Class Grade report for ' || p_report_date || ' by section</td></tr>';
+  v_output := v_output || '<tr><td>student_id</td><td>last_name</td><td>first_name</td><td>description</td><td>section_id</td><td>grade</td></tr>';
+
+  -- Get the data for the student and loop through each row to add it to the HTML table
+  FOR rec IN (
+    SELECT student_id, last_name, first_name, description, section_id, YOURLETTERFUNCTIONHERE(avg(numeric_grade)) as letter_grade
+    FROM course
+    JOIN section USING(course_no)
+    JOIN grade USING(section_id)
+    JOIN student USING(student_id)
+    WHERE student_id = p_student_id
+    GROUP BY student_id, first_name, last_name, description, section_id
+    ORDER BY description, section_id, student_id
+  ) LOOP
+    v_output := v_output || '<tr><td>' || rec.student_id || '</td><td>' || rec.last_name || '</td><td>' || rec.first_name || '</td><td>' || rec.description || '</td><td>' || rec.section_id || '</td><td>' || rec.letter_grade || '</td></tr>';
+  END LOOP;
+
+======================================= 
+
+FOR DEBUGING PROCEDURE
+DECLARE
+   V_OUTPUT VARCHAR2(32767);
+BEGIN
+   -- CALL THE PROCEDURE FOR A SPECIFIC STUDENT AND DATE
+   get_student_grade_report(123, SYSDATE, V_OUTPUT);
+   DBMS_OUTPUT.PUT_LINE(V_OUTPUT);
+END;
+
+==================================
+CREATE OR REPLACE PROCEDURE get_student_grades(
+    i_student_id IN student.student_id%TYPE,
+    o_letter_grade OUT VARCHAR2,
+    o_gpa_point OUT NUMBER
+)
+IS
+BEGIN
+    SELECT get_letter_grade(avg(numeric_grade)) INTO p_letter_grade
+    FROM course
+    JOIN section USING(course_no)
+    JOIN grade USING (section_id)
+    WHERE student_id = p_student_id;
+    
+    SELECT get_(avg(numeric_grade)) INTO p_gpa_point
+    FROM course
+    JOIN section USING(course_no)
+    JOIN grade USING (section_id)
+    WHERE student_id = p_student_id;
+END;
